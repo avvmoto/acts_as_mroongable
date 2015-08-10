@@ -2,7 +2,7 @@ module ActsAsMroongable
   module Core
     extend ActiveSupport::Concern
 
-    GROONGA_ESCAPE_CHARS = %q{() \'"} # see detail for http://groonga.org/ja/docs/reference/grn_expr/query_syntax.html
+    GROONGA_ESCAPE_CHARS = %q{() \'"+-><~*:} # see detail for http://groonga.org/ja/docs/reference/grn_expr/query_syntax.html, http://mroonga.org/ja/blog/2013/08/29/release.html
 
     included do
     end
