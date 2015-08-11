@@ -17,10 +17,10 @@ class ActsAsMroongableTest < ActiveSupport::TestCase
   end
 
   test "mroonga_match" do
-    assert_equal "SELECT \"books\".* FROM \"books\"  WHERE (MATCH(abstract) AGAINST(mroonga_escape('query', '() \\'\"') IN BOOLEAN MODE))", Book.mroonga_match("query", "abstract").to_sql
+    assert_equal "SELECT \"books\".* FROM \"books\"  WHERE (MATCH(abstract) AGAINST(mroonga_escape('query', '() \\'\"+-><~*:') IN BOOLEAN MODE))", Book.mroonga_match("query", "abstract").to_sql
   end
 
   test "mroonga_snippet" do
-    assert_equal "SELECT *, mroonga_snippet(abstract, 1500, 1, 'utf8_unicode_ci', 1, 1, '', '', mroonga_escape('query', '() \\'\"'), '<span>', '</span>' ) AS hilighted_abstract FROM \"books\"  WHERE (MATCH(abstract) AGAINST(mroonga_escape('query', '() \\'\"') IN BOOLEAN MODE))", Book.mroonga_match("query", "abstract").mroonga_snippet("query", "abstract").to_sql
+    assert_equal "SELECT *, mroonga_snippet(abstract, 1500, 1, 'utf8_unicode_ci', 1, 1, '', '', mroonga_escape('query', '() \\'\"+-><~*:'), '<span>', '</span>' ) AS hilighted_abstract FROM \"books\"  WHERE (MATCH(abstract) AGAINST(mroonga_escape('query', '() \\'\"+-><~*:') IN BOOLEAN MODE))", Book.mroonga_match("query", "abstract").mroonga_snippet("query", "abstract").to_sql
   end
 end
